@@ -6,6 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import {  MapPage } from '../pages/map/map';
+
+import { ListPage } from '../pages/list/list';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 
@@ -13,14 +16,14 @@ import { AngularFireAuth } from 'angularfire2/auth';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = LoginPage;
 
   constructor(private afAuth: AngularFireAuth, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     this.afAuth.authState.subscribe(auth => {
       if (!auth)
         this.rootPage = LoginPage;
       else
-        this.rootPage = HomePage;
+        this.rootPage = ListPage;
     });
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

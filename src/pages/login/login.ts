@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController  } from 'ionic-ang
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../home/home'
 import { RegisterPage } from '../register/register'
+import { ListPage } from '../list/list'
 
 /**
  * Generated class for the LoginPage page.
@@ -23,6 +24,7 @@ export class LoginPage {
 
   
   constructor(private alertCtrl:AlertController,private auth: AngularFireAuth,public navCtrl: NavController, public navParams: NavParams) {
+  
   }
 
   alert(message: string) {
@@ -46,7 +48,7 @@ export class LoginPage {
       if ( response.emailVerified )
       {
         console.log("Success");
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(ListPage);
       }
       else
       {
