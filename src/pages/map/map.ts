@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 /**
  * Generated class for the MapPage page.
@@ -27,7 +27,7 @@ export class MapPage {
    KeyPassed: string=null;
 
   
-  constructor(public Database:AngularFireDatabase,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public Database:AngularFireDatabase,public navCtrl: NavController, public navParams: NavParams,public ToastCntrl: ToastController) {
   
   this.KeyPassed = this.navParams.get('Key');
   console.log(this.KeyPassed + ' Key Passed');
@@ -80,6 +80,7 @@ export class MapPage {
        KeyValue=snapshot.key.toString(); //Getting the changed value key name
        if(!KeyValue.localeCompare('geolocation')){
          console.log('Location recieved '+ChangedValue.latitude+' '+ ChangedValue.longitude);
+         this.PresentMessage('Location recieved '+ChangedValue.latitude+' '+ ChangedValue.longitude);
          Latitude=ChangedValue.latitude;
          Longitude=ChangedValue.longitude;
          this.Lat=Latitude;
@@ -134,6 +135,17 @@ export class MapPage {
     this.ActiveMarker.setMap(null);
     }
     console.log("Removing Marker");
+  }
+
+  PresentMessage(Mssg: String)
+  {
+    const toast = this.ToastCntrl.create({
+    message: Mssg.toString(),
+    duration: 3000,
+    position: 'bottom'
+      });
+
+    toast.present();
   }
 
 }
