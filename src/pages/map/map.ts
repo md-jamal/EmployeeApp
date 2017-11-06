@@ -44,12 +44,12 @@ export class MapPage {
   initMap(){
     let mapEle= this.mapElement.nativeElement;
     this.map= new google.maps.Map(mapEle,{zoom : 14,
-                                          center: {lat: 17.437098,lng: 78.386266}
+                                          center: {lat: 17.451571,lng: 78.381041}
                                         });
-   var marker= new google.maps.Marker({position : {lat: 17.437098,lng: 78.386266},
+   /*var marker= new google.maps.Marker({position : {lat: 17.437098,lng: 78.386266},
                                         map:this.map,
                                         title: "You are here!"
-                                      });
+                                      });*/
 
    google.maps.event.addListenerOnce(this.map, 'idle', () => {
           mapEle.classList.add('show-map');
@@ -102,6 +102,7 @@ export class MapPage {
       console.log('Updating marker position');
       this.ActiveMarker.setPosition({lat: parseFloat(this.Lat),lng: parseFloat(this.Long)});
     }
+    this.map.setCenter({lat:parseFloat(this.Lat),lng: parseFloat(this.Long)});
   }
 
   SetMarker()
